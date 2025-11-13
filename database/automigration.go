@@ -6,8 +6,8 @@ import (
 )
 
 func Migrate(db *gorm.DB) error {
-	if err := db.AutoMigrate(&models.Genres{}, &models.MoviePersons{}, &models.Movie_awards{}, &models.Movies{},
-		&models.Person_awards{}, &models.Persons{}); err != nil {
+	if err := db.AutoMigrate(&models.Genres{}, &models.MoviePersons{}, &models.MovieAwards{}, &models.Movies{},
+		&models.PersonAwards{}, &models.Persons{}); err != nil {
 		return err
 	}
 	return nil

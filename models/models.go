@@ -2,23 +2,21 @@ package models
 
 import "gorm.io/gorm"
 
-type Movie_awards struct {
+type MovieAwards struct {
 	gorm.Model
-	MovieID   int    `json:"movie_id"`
-	Movie     Movies `json:"movie" gorm:"foreignKey:MovieID"`
+	MovieID   uint   `json:"movie_id"`
 	AwardName string `json:"award_name"`
 	Category  string `json:"category"`
-	Year      int    `json:"year"`
+	Year      uint   `json:"year"`
 	Result    string `json:"result"`
 }
 
-type Person_awards struct {
+type PersonAwards struct {
 	gorm.Model
-	PersonID int     `json:"person_id"`
-	Person   Persons `json:"person" gorm:"foreignKey:PersonID"`
-	Category string  `json:"category"`
-	Year     string  `json:"year"`
-	Result   string  `json:"result"`
+	PersonID uint   `json:"person_id"`
+	Category string `json:"category"`
+	Year     string `json:"year"`
+	Result   string `json:"result"`
 }
 
 type Movies struct {
@@ -32,7 +30,6 @@ type Movies struct {
 	Country       string  `json:"country"`
 	Description   string  `json:"description"`
 	GenreID       uint    `json:"genre_id"`
-	Genre         Genres  `gorm:"foreignKey:GenreID"`
 }
 
 type Genres struct {
@@ -49,8 +46,7 @@ type Persons struct {
 
 type MoviePersons struct {
 	gorm.Model
-	MovieID  uint    `json:"movie_id"`
-	Movies   Movies  `gorm:"foreignKey:MovieID"`
-	PersonID uint    `json:"person_id"`
-	Persons  Persons `gorm:"foreignKey:PersonID"`
+	MovieID  uint   `json:"movie_id"`
+	Movies   Movies `gorm:"foreignKey:MovieID"`
+	PersonID uint   `json:"person_id"`
 }

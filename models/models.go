@@ -1,8 +1,6 @@
-
 package models
 
 import "gorm.io/gorm"
-
 
 type Movie_awards struct {
 	gorm.Model
@@ -16,14 +14,12 @@ type Movie_awards struct {
 
 type Person_awards struct {
 	gorm.Model
-	PersonID int `json: "person_id"`
+	PersonID int     `json:"person_id"`
 	Person   Persons `json:"person" gorm:"foreignKey:PersonID"`
-	Category string `json:"category"`
-	Year     string `json:"year"`
-	Result   string `json:"result"`
+	Category string  `json:"category"`
+	Year     string  `json:"year"`
+	Result   string  `json:"result"`
 }
-
-
 
 type Movies struct {
 	gorm.Model
@@ -42,6 +38,7 @@ type Movies struct {
 type Genres struct {
 	gorm.Model
 	Name string `json:"name" gorm:"unique;not null"`
+}
 
 type Persons struct {
 	gorm.Model

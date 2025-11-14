@@ -3,13 +3,17 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/magadov/kinopoisk-app/database"
+	"github.com/magadov/kinopoisk-app/routes"
 )
 
 func main() {
-	db := database.Init()
-	database.Migrate(db)
+	database.Init()
+	database.Migrate(database.DB)
 
 	router := gin.Default()
 
-	router.Run(":5500")
+	routes.SetupGenres(router)
+	routes.SetupMovies(router)
+
+	router.Run(":5600")
 }

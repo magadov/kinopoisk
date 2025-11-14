@@ -90,3 +90,15 @@ func DeleteAward(c *gin.Context) {
 
 	c.JSON(http.StatusOK, "deleted")
 }
+
+func WinMovieOfYear(c *gin.Context){
+	var winMovies []models.MovieAwards
+
+	if res := database.DB.Where("year = ? AND result = ?", c.Param("year"), "win").Find(&winMovies); res.Error != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error" : res.Error})
+		return
+	}
+
+	c.JSON(http.StatusOK, winMovies)
+
+}

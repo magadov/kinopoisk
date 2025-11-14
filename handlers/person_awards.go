@@ -78,3 +78,15 @@ func DeletePersonAw(c *gin.Context){
 
 	c.JSON(http.StatusOK, gin.H{"message": "deleted"})
 }
+
+func WinnersOfYear(c *gin.Context){
+	var winPersons []models.PersonAwards
+
+	if res := database.DB.Where("year = ? AND result = ?", c.Param("year"), "win").Find(&winPersons); res.Error != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error" : res.Error})
+		return
+	}
+
+	c.JSON(http.StatusOK, winPersons)
+
+}

@@ -14,5 +14,8 @@ func main() {
 	routes.SetupPersons(router)
 	routes.SetupMoviePersons(router)
 
-	router.Run(":5500")
+	routes.SetupGenres(router)
+	routes.SetupMovies(router)
+
+	router.Run(":5600")
 }

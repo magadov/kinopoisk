@@ -7,13 +7,18 @@ import (
 )
 
 func main() {
+
     database.Init()
+
 	database.Migrate(database.DB)
 
 	router := gin.Default()
-
+	
+	routes.SetupPersons(router)
+	routes.SetupMoviePersons(router)
 	routes.SetupAwards(router)
 	routes.SetupPersonAw(router)
 
 	router.Run(":8080")
+
 }

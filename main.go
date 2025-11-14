@@ -11,6 +11,8 @@ func main() {
 	database.Migrate(database.DB)
 
 	router := gin.Default()
+	routes.SetupPersons(router)
+	routes.SetupMoviePersons(router)
 
 	routes.SetupGenres(router)
 	routes.SetupMovies(router)

@@ -8,24 +8,22 @@ import (
 	"github.com/magadov/kinopoisk-app/models"
 )
 
-
-	
-func AllPersonAw(c *gin.Context){
+func AllPersonAw(c *gin.Context) {
 	var persAwards []models.PersonAwards
 
-	if res := database.DB.Find(&persAwards); res.Error != nil{
-		c.JSON(http.StatusBadRequest, gin.H{"error" : res.Error.Error()})
+	if res := database.DB.Find(&persAwards); res.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": res.Error.Error()})
 		return
 	}
 
 	c.JSON(http.StatusOK, persAwards)
 }
 
-func CreatePersonAw(c *gin.Context){
+func CreatePersonAw(c *gin.Context) {
 	var persAwardsInp models.PersonAwardsDTO
 
-	if err := c.ShouldBindJSON(&persAwardsInp); err != nil{
-		c.JSON(http.StatusBadRequest, gin.H{"error" : err.Error()})
+	if err := c.ShouldBindJSON(&persAwardsInp); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -36,19 +34,19 @@ func CreatePersonAw(c *gin.Context){
 		Result:   persAwardsInp.Result,
 	}
 
-	if res := database.DB.Create(&persAwards); res.Error != nil{
-		c.JSON(http.StatusBadRequest, gin.H{"error" : res.Error.Error()})
+	if res := database.DB.Create(&persAwards); res.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": res.Error.Error()})
 		return
 	}
 
 	c.JSON(http.StatusOK, persAwards)
 }
 
-func UpdatePersonAw(c *gin.Context){
+func UpdatePersonAw(c *gin.Context) {
 	id := c.Param("id")
 	var personAwUpdInp models.PersonAwardsDTO
 
-	if err := c.ShouldBindJSON(&personAwUpdInp); err != nil{
+	if err := c.ShouldBindJSON(&personAwUpdInp); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -62,7 +60,7 @@ func UpdatePersonAw(c *gin.Context){
 	c.JSON(http.StatusOK, personAwUpd)
 }
 
-func DeletePersonAw(c *gin.Context){
+func DeletePersonAw(c *gin.Context) {
 	id := c.Param("id")
 	var persAwardsDelete models.PersonAwards
 
@@ -79,14 +77,13 @@ func DeletePersonAw(c *gin.Context){
 	c.JSON(http.StatusOK, gin.H{"message": "deleted"})
 }
 
-func WinnersOfYear(c *gin.Context){
+func WinnersOfYear(c *gin.Context) {
 	var winPersons []models.PersonAwards
 
-	if res := database.DB.Where("year = ? AND result = ?", c.Param("year"), "win").Find(&winPersons); res.Error != nil{
-		c.JSON(http.StatusBadRequest, gin.H{"error" : res.Error})
+	if res := database.DB.Where("year = ? AND result = ?", c.Param("year"), "win").Find(&winPersons); res.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": res.Error})
 		return
 	}
 
 	c.JSON(http.StatusOK, winPersons)
-
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/magadov/kinopoisk-app/handlers"
 )
 
-func SetupAwards(r *gin.Engine){
+func SetupAwards(r *gin.Engine) {
 	{
 		groupAwards := r.Group("/awards")
 
